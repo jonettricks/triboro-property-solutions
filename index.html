@@ -232,6 +232,32 @@ footer{padding:35px 0 52px;color:var(--muted);font-size:13px}
 .verify-link{font-size:12px;font-weight:900;color:var(--maroon);text-decoration:none;text-align:center}
 .verify-link:hover{text-decoration:underline}
 
+
+.lead-section{display:grid;grid-template-columns:.8fr 1.2fr;gap:38px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:34px;padding:44px;box-shadow:var(--shadow)}
+.lead-intro h2{font-size:clamp(34px,4.5vw,50px);line-height:1.02;letter-spacing:-.045em;margin:9px 0 14px}
+.lead-intro p{color:var(--muted);font-size:17px;margin:0 0 22px}
+.contact-shortcuts{display:flex;gap:10px;flex-wrap:wrap}
+.form-text-btn{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.seller-form{background:var(--soft);border-radius:24px;padding:26px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field.full{grid-column:1/-1}
+.field label{font-weight:850;font-size:14px}
+.field label span{color:var(--maroon)}
+.field label small{color:var(--muted);font-weight:650}
+.field input,.field textarea{width:100%;border:1px solid #d8cfc3;background:#fff;border-radius:13px;padding:13px 14px;font:inherit;color:var(--ink);outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--maroon);box-shadow:0 0 0 3px rgba(113,16,21,.08)}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.choice{display:flex!important;align-items:center;gap:9px;background:#fff;border:1px solid #ddd3c6;border-radius:12px;padding:11px 12px;font-weight:700!important;cursor:pointer}
+.choice input{width:auto;margin:0;accent-color:var(--maroon)}
+.submit-btn{width:100%;border:0;border-radius:999px;background:var(--maroon);color:#fff;padding:15px 20px;font:inherit;font-weight:950;cursor:pointer;margin-top:19px;box-shadow:0 10px 25px rgba(113,16,21,.18)}
+.submit-btn:disabled{opacity:.65;cursor:wait}
+.form-note{text-align:center;color:var(--muted);font-size:12px;margin:10px 0 0}
+.form-status{margin-top:12px;font-size:14px;font-weight:800;text-align:center}
+.form-status.success{color:#255c3a}.form-status.error{color:#8a1c1c}
+@media(max-width:900px){.lead-section{grid-template-columns:1fr;padding:32px 26px}}
+@media(max-width:650px){.form-grid,.choice-grid{grid-template-columns:1fr}.seller-form{padding:21px 17px}.lead-section{padding:27px 19px}}
+
 </style>
 </head>
 <body>
@@ -400,12 +426,58 @@ footer{padding:35px 0 52px;color:var(--muted);font-size:13px}
 
   <section id="contact">
     <div class="wrap">
-      <div class="cta">
-        <div>
-          <h2>Start with the property.</h2>
-          <p>Call or text Jonathan at Triboro Property Solutions. Give us the address, your asking price, and a little about the situation. Prefer not to call? Our short property form will be available here as the next step.</p>
+      <div class="lead-section">
+        <div class="lead-intro">
+          <div class="kicker">Tell Us About Your Property</div>
+          <h2>Start with a few details.</h2>
+          <p>You do not need to know which selling option fits. Tell us about the property and what matters most to you. Jonathan will review the information and follow up personally.</p>
+          <div class="contact-shortcuts">
+            <a class="btn btn-primary" href="tel:+13473451460">Call Jonathan</a>
+            <a class="btn form-text-btn" href="sms:+13473451460?&body=Hi%20Jonathan%2C%20I%20have%20a%20property%20I%27d%20like%20to%20discuss.">Text Jonathan</a>
+          </div>
         </div>
-        <a class="btn" href="tel:+13473451460">347-345-1460</a>
+        <form id="seller-form" class="seller-form" action="https://formspree.io/f/xkjwkree" method="POST">
+          <input type="hidden" name="_subject" value="New TriboroHomes.com Seller Lead">
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Name <span>*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="phone">Phone <span>*</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="email">Email <small>optional</small></label>
+              <input id="email" name="email" type="email" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="address">Property Address <span>*</span></label>
+              <input id="address" name="property_address" type="text" autocomplete="street-address" required>
+            </div>
+            <div class="field">
+              <label for="price">Asking Price <small>optional</small></label>
+              <input id="price" name="asking_price" type="text" inputmode="decimal" placeholder="$">
+            </div>
+            <div class="field full">
+              <label>What's most important to you?</label>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="priority" value="Selling quickly"><span>Selling quickly</span></label>
+                <label class="choice"><input type="radio" name="priority" value="Getting as close to my price as possible"><span>Getting as close to my price as possible</span></label>
+                <label class="choice"><input type="radio" name="priority" value="Avoiding repairs or hassle"><span>Avoiding repairs or hassle</span></label>
+                <label class="choice"><input type="radio" name="priority" value="Exploring flexible terms"><span>Exploring flexible terms</span></label>
+                <label class="choice"><input type="radio" name="priority" value="I'm not sure yet"><span>I'm not sure yet</span></label>
+              </div>
+            </div>
+            <div class="field full">
+              <label for="message">Anything else we should know? <small>optional</small></label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+          </div>
+          <button id="submit-btn" class="submit-btn" type="submit">Show Me My Options</button>
+          <p class="form-note">No obligation. Your information is used only to respond to your property inquiry.</p>
+          <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+        </form>
       </div>
     </div>
   </section>
@@ -426,6 +498,46 @@ footer{padding:35px 0 52px;color:var(--muted);font-size:13px}
   <a href="tel:+13473451460">Call Jonathan</a>
   <a href="sms:+13473451460?&body=Hi%20Jonathan%2C%20I%20have%20a%20property%20I%27d%20like%20to%20discuss.">Text Jonathan</a>
 </div>
+
+
+<script>
+(function(){
+  const form=document.getElementById('seller-form');
+  if(!form)return;
+  const status=document.getElementById('form-status');
+  const button=document.getElementById('submit-btn');
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();
+    status.textContent='';
+    status.className='form-status';
+    button.disabled=true;
+    button.textContent='Sending...';
+    try{
+      const response=await fetch(form.action,{
+        method:form.method,
+        body:new FormData(form),
+        headers:{'Accept':'application/json'}
+      });
+      if(response.ok){
+        form.reset();
+        status.textContent='Thanks — your property information was sent. Jonathan will review it and follow up.';
+        status.className='form-status success';
+        button.textContent='Sent';
+      }else{
+        status.textContent="We couldn't send the form. Please try again or call/text Jonathan at 347-345-1460.";
+        status.className='form-status error';
+        button.disabled=false;
+        button.textContent='Show Me My Options';
+      }
+    }catch(err){
+      status.textContent="We couldn't send the form. Please try again or call/text Jonathan at 347-345-1460.";
+      status.className='form-status error';
+      button.disabled=false;
+      button.textContent='Show Me My Options';
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
